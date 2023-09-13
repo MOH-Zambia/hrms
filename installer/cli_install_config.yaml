@@ -3,7 +3,7 @@ database:
   hostPort: 3306
   databaseName: orangehrm_mysql
   privilegedDatabaseUser: root
-  privilegedDatabasePassword: root
+  privilegedDatabasePassword:
   useSameDbUserForOrangeHRM: y # y/n, if this field `n` fill `orangehrmDatabaseUser` and `orangehrmDatabasePassword`
   orangehrmDatabaseUser: ~
   orangehrmDatabasePassword: ~

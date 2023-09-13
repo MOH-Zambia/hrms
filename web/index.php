@@ -27,7 +27,8 @@ use Symfony\Component\ErrorHandler\Debug;
 
 require realpath(__DIR__ . '/../src/vendor/autoload.php');
 
-$env = 'prod';
+//$env = 'prod';
+$env = 'dev';
 $debug = 'prod' !== $env;
 
 if ($debug) {

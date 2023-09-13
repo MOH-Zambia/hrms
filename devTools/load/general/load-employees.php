@@ -20,17 +20,19 @@
  * As above, for each employee, username and password would be his/her first name
  *
  */
+require_once dirname(__DIR__). '../../core/vendor/autoload.php';
 
 // Database information
 require_once "../../../lib/confs/Conf.php";
 
 // Connecting to the database
 $conf = new Conf();
-$dbConnection = mysqli_connect($conf->dbhost, $conf->dbuser, $conf->dbpass, $conf->dbname, $conf->dbport);
+
+$dbConnection = mysqli_connect($conf->getDbHost(), $conf->getDbUser(), $conf->getDbPass(), $conf->getDbName(), $conf->getDbPort());
 if (!$dbConnection) { echo mysqli_error($dbConnection); die; }
 $dbConnection->set_charset("utf8mb4");
 
-//if (!mysqli_select_db($conf->dbname)) { echo mysqli_error(); exit(0); }
+//if (!mysqli_select_db($conf->dbName)) { echo mysqli_error(); exit(0); }
 
 // Truncating tables
 if (!mysqli_query($dbConnection,"DELETE from `hs_hr_employee`")) { echo mysqli_error($dbConnection); die; }
