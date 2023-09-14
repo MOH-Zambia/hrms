@@ -56,6 +56,22 @@
                     :rules="rules.employeeId"
                   />
                 </oxd-grid-item>
+                <oxd-grid-item>
+                  <oxd-input-field
+                    v-model="employee.nrc"
+                    :label="$t('general.nrc')"
+                    :rules="rules.nrc"
+                  />
+                </oxd-grid-item>
+              </oxd-grid>
+              <oxd-grid :cols="2" class="orangehrm-full-width-grid">
+                <oxd-grid-item>
+                  <oxd-input-field
+                    v-model="employee.mpsaFileNumber"
+                    :label="$t('general.mpsaFileNumber')"
+                    :rules="rules.mpsa_file_number"
+                  />
+                </oxd-grid-item>
               </oxd-grid>
             </oxd-form-row>
             <oxd-divider />
@@ -148,6 +164,8 @@ const employeeModel = {
   lastName: '',
   empPicture: null,
   employeeId: '',
+  nrc: '',
+  mpsaFileNumber: '',
 };
 
 const userModel = {
@@ -172,6 +190,14 @@ export default {
       type: String,
       required: true,
     },
+    nrc: {
+      type: String,
+      required: true,
+    },
+    mpsaFileNumber: {
+      type: String,
+      required: true,
+    },
     allowedImageTypes: {
       type: Array,
       required: true,
@@ -182,6 +208,7 @@ export default {
     const employee = ref({
       ...employeeModel,
       employeeId: props.empId ? props.empId : '',
+      nrc: props.nrc ? props.nrc : '',
     });
 
     const http = new APIService(
@@ -206,6 +233,8 @@ export default {
         middleName: [shouldNotExceedCharLength(30)],
         lastName: [required, shouldNotExceedCharLength(30)],
         employeeId: [shouldNotExceedCharLength(10)],
+        nrc: [shouldNotExceedCharLength(11)],
+        mpsa_file_number: [shouldNotExceedCharLength(254)],
         empPicture: [
           maxFileSize(1024 * 1024),
           validFileTypes(this.allowedImageTypes),

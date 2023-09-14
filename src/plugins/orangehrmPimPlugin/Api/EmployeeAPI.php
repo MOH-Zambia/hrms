@@ -50,6 +50,8 @@ class EmployeeAPI extends Endpoint implements CrudEndpoint
 
     public const FILTER_NAME = 'name';
     public const FILTER_EMP_NUMBER = 'empNumber';
+    public const FILTER_NRC = 'nrc';
+    public const FILTER_MPSA_FILE_NUMBER = 'mpsa_file_number';
     public const FILTER_NAME_OR_ID = 'nameOrId';
     public const FILTER_EMPLOYEE_ID = 'employeeId';
     public const FILTER_INCLUDE_EMPLOYEES = 'includeEmployees';
@@ -59,12 +61,16 @@ class EmployeeAPI extends Endpoint implements CrudEndpoint
     public const FILTER_SUPERVISOR_EMP_NUMBERS = 'supervisorEmpNumbers';
     public const FILTER_MODEL = 'model';
 
+    public const PARAMETER_NRC = 'nrc';
+    public const PARAMETER_MPSA_FILE_NUMBER = 'mpsa_file_number';
     public const PARAMETER_FIRST_NAME = 'firstName';
     public const PARAMETER_MIDDLE_NAME = 'middleName';
     public const PARAMETER_LAST_NAME = 'lastName';
     public const PARAMETER_EMPLOYEE_ID = 'employeeId';
     public const PARAMETER_EMP_PICTURE = 'empPicture';
 
+    public const PARAM_RULE_NRC_MAX_LENGTH = EmployeeService::NRC_MAX_LENGTH;
+    public const PARAM_RULE_MPSA_FILE_NUMBER_MAX_LENGTH = EmployeeService::MPSA_FILE_NUMBER_MAX_LENGTH;
     public const PARAM_RULE_FIRST_NAME_MAX_LENGTH = EmployeeService::FIRST_NAME_MAX_LENGTH;
     public const PARAM_RULE_MIDDLE_NAME_MAX_LENGTH = EmployeeService::MIDDLE_NAME_MAX_LENGTH;
     public const PARAM_RULE_LAST_NAME_MAX_LENGTH = EmployeeService::LAST_NAME_MAX_LENGTH;
@@ -268,6 +274,20 @@ class EmployeeAPI extends Endpoint implements CrudEndpoint
             ),
             $this->getValidationDecorator()->notRequiredParamRule(
                 new ParamRule(
+                    self::FILTER_NRC,
+                    new Rule(Rules::STRING_TYPE),
+                    new Rule(Rules::LENGTH, [null, self::PARAM_RULE_NRC_MAX_LENGTH]),
+                )
+            ),
+            $this->getValidationDecorator()->notRequiredParamRule(
+                new ParamRule(
+                    self::FILTER_MPSA_FILE_NUMBER,
+                    new Rule(Rules::STRING_TYPE),
+                    new Rule(Rules::LENGTH, [null, self::PARAM_RULE_MPSA_FILE_NUMBER_MAX_LENGTH]),
+                )
+            ),
+            $this->getValidationDecorator()->notRequiredParamRule(
+                new ParamRule(
                     self::FILTER_EMPLOYEE_ID,
                     new Rule(Rules::STRING_TYPE),
                     new Rule(Rules::LENGTH, [null, self::PARAM_RULE_EMPLOYEE_ID_MAX_LENGTH]),
@@ -357,6 +377,14 @@ class EmployeeAPI extends Endpoint implements CrudEndpoint
         $firstName = $this->getRequestParams()->getString(RequestParams::PARAM_TYPE_BODY, self::PARAMETER_FIRST_NAME);
         $middleName = $this->getRequestParams()->getString(RequestParams::PARAM_TYPE_BODY, self::PARAMETER_MIDDLE_NAME);
         $lastName = $this->getRequestParams()->getString(RequestParams::PARAM_TYPE_BODY, self::PARAMETER_LAST_NAME);
+        $nrc = $this->getRequestParams()->getStringOrNull(
+            RequestParams::PARAM_TYPE_BODY,
+            self::PARAMETER_NRC
+        );
+        $mpsaFileNumber = $this->getRequestParams()->getStringOrNull(
+            RequestParams::PARAM_TYPE_BODY,
+            self::PARAMETER_MPSA_FILE_NUMBER
+        );
         $employeeId = $this->getRequestParams()->getStringOrNull(
             RequestParams::PARAM_TYPE_BODY,
             self::PARAMETER_EMPLOYEE_ID
@@ -366,6 +394,8 @@ class EmployeeAPI extends Endpoint implements CrudEndpoint
         $employee->setMiddleName($middleName);
         $employee->setLastName($lastName);
         $employee->setEmployeeId($employeeId);
+        $employee->setNrc($nrc);
+        $employee->setMpsaFileNumber($mpsaFileNumber);
     }
 
     /**
@@ -393,6 +423,20 @@ class EmployeeAPI extends Endpoint implements CrudEndpoint
     private function getCommonBodyValidationRules(): array
     {
         return [
+            $this->getValidationDecorator()->requiredParamRule(
+                new ParamRule(
+                    self::PARAMETER_NRC,
+                    new Rule(Rules::STRING_TYPE),
+                    new Rule(Rules::LENGTH, [null, self::PARAM_RULE_NRC_MAX_LENGTH]),
+                )
+            ),
+            $this->getValidationDecorator()->requiredParamRule(
+                new ParamRule(
+                    self::PARAMETER_MPSA_FILE_NUMBER,
+                    new Rule(Rules::STRING_TYPE),
+                    new Rule(Rules::LENGTH, [null, self::PARAM_RULE_MPSA_FILE_NUMBER_MAX_LENGTH]),
+                )
+            ),
             $this->getValidationDecorator()->requiredParamRule(
                 new ParamRule(
                     self::PARAMETER_FIRST_NAME,

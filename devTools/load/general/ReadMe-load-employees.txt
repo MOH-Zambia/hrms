@@ -1,1 +1,1 @@
-http://localhost/orangehrm/devTools/load/general/loadEmployees.php
+http://localhost/hrms/devTools/load/general/load-employees.php

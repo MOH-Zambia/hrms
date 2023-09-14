@@ -63,6 +63,20 @@ class Employee
     private int $empNumber;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="nrc", type="string", length=11)
+     */
+    private string $nrc;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mpsa_file_number", type="string", length=254)
+     */
+    private string $mpsaFileNumber;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="employee_id", type="string", length=50, nullable=true)
@@ -590,6 +604,39 @@ class Employee
     {
         $this->empNumber = $empNumber;
     }
+
+    /**
+     * @return string
+     */
+    public function getNrc(): string
+    {
+        return $this->nrc;
+    }
+
+    /**
+     * @param string $nrc
+     */
+    public function setNrc(string $nrc): void
+    {
+        $this->nrc = $nrc;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMpsaFileNumber(): string
+    {
+        return $this->mpsaFileNumber;
+    }
+
+    /**
+     * @param string $mpsaFileNumber
+     */
+    public function setMpsaFileNumber(string $mpsaFileNumber): void
+    {
+        $this->mpsaFileNumber = $mpsaFileNumber;
+    }
+
 
     /**
      * @return string|null

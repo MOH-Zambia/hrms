@@ -47,6 +47,8 @@ class EmployeeService
     use UserServiceTrait;
     use UserRoleManagerTrait;
 
+    public const NRC_MAX_LENGTH = 11;
+    public const MPSA_FILE_NUMBER_MAX_LENGTH = 254;
     public const FIRST_NAME_MAX_LENGTH = 30;
     public const MIDDLE_NAME_MAX_LENGTH = 30;
     public const LAST_NAME_MAX_LENGTH = 30;

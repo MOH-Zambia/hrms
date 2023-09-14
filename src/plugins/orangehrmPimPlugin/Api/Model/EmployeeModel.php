@@ -48,6 +48,8 @@ class EmployeeModel implements Normalizable
         $this->setFilters(
             [
                 'empNumber',
+                'nrc',
+                'mpsaFileNumber',
                 'lastName',
                 'firstName',
                 'middleName',
@@ -58,6 +60,8 @@ class EmployeeModel implements Normalizable
         $this->setAttributeNames(
             [
                 'empNumber',
+                'nrc',
+                'mpsaFileNumber',
                 'lastName',
                 'firstName',
                 'middleName',
