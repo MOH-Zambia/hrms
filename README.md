@@ -35,6 +35,8 @@ OrangeHRM is distributed in the hope that it will be useful, but WITHOUT ANY WAR
     src='https://raw.githubusercontent.com/wiki/orangehrm/orangehrm/mobile/app_store_en_US.svg'/>
 </a>
 
+DEMO-ING
+
 ## Resources
 
 ### Demo
